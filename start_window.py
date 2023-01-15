@@ -36,6 +36,8 @@ def main():
     bg = pygame.transform.scale(load_image('bg.jpg'), (WIDTH, HEIGHT))
     screen.blit(bg, (0, 0))
 
+    all_sprites = pygame.sprite.Group()
+
     btn_image = load_image("button.png", colorkey=-1)
     btn_image = pygame.transform.scale(btn_image, (500, 250))
     btn = pygame.sprite.Sprite(all_sprites)
@@ -56,8 +58,6 @@ def main():
         pygame.display.flip()
         clock.tick(FPS)
 
-
-all_sprites = pygame.sprite.Group()
 
 if __name__ == '__main__':
     main()

@@ -32,7 +32,7 @@ def terminate():
     sys.exit()
 
 
-def main():
+def show_start_window():
     bg = pygame.transform.scale(load_image('bg.jpg'), (WIDTH, HEIGHT))
     screen.blit(bg, (0, 0))
 
@@ -60,4 +60,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    show_start_window()

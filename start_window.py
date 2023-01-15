@@ -36,17 +36,28 @@ def main():
     bg = pygame.transform.scale(load_image('bg.jpg'), (WIDTH, HEIGHT))
     screen.blit(bg, (0, 0))
 
+    btn_image = load_image("button.png", colorkey=-1)
+    btn_image = pygame.transform.scale(btn_image, (500, 250))
+    btn = pygame.sprite.Sprite(all_sprites)
+    btn.image = btn_image
+    btn.rect = btn.image.get_rect()
+
+    btn.rect.x = 390
+    btn.rect.y = 235
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 terminate()
-            elif event.type == pygame.KEYDOWN or \
-                    event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONDOWN \
+                    and btn.rect.collidepoint(event.pos):
                 return
+        all_sprites.draw(screen)
         pygame.display.flip()
         clock.tick(FPS)
 
+
+all_sprites = pygame.sprite.Group()
 
 if __name__ == '__main__':
     main()

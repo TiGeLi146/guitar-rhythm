@@ -56,7 +56,7 @@ def run_level1():
     pygame.time.set_timer(NEWARROWEVENT, 1000)
 
     ENDLEVELEVENT = pygame.USEREVENT + 2
-    pygame.time.set_timer(ENDLEVELEVENT, 60000, 1)
+    pygame.time.set_timer(ENDLEVELEVENT, 6000, 1)
 
     CHANGERADEVENT = pygame.USEREVENT + 3
     pygame.time.set_timer(CHANGERADEVENT, 100)
@@ -91,6 +91,10 @@ def run_level1():
         text_rect.midtop = (x, y)
         surf.blit(text_surface, text_rect)
 
+    def save_result(res):
+        f = open("data/res.txt", 'w')
+        f.write(str(res))
+
     current_arrow = 'left'
 
     draw_new_arrow()
@@ -104,7 +108,8 @@ def run_level1():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                terminate()
+                save_result(score)
+                return
             if event.type == NEWARROWEVENT:
                 rad = 700
                 for i in all_sprites:
@@ -123,7 +128,8 @@ def run_level1():
                     all_sprites.clear(screen, bg)
                 Circle(rad, c_x, c_y)
             if event.type == ENDLEVELEVENT:
-                terminate()
+                save_result(score)
+                return
             if event.type == pygame.KEYDOWN:
                 if (event.key == pygame.K_UP
                     and current_arrow == 'up') or \

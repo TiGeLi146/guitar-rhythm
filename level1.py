@@ -34,6 +34,9 @@ def terminate():
 
 
 def run_level1():
+    pygame.mixer.music.load('data/level2.mp3')
+    pygame.mixer.music.play()
+
     arrow_images = {
         'left': load_image('left.png', colorkey=-1),
         'right': load_image('right.png', colorkey=-1),
@@ -56,7 +59,7 @@ def run_level1():
     pygame.time.set_timer(NEWARROWEVENT, 1000)
 
     ENDLEVELEVENT = pygame.USEREVENT + 2
-    pygame.time.set_timer(ENDLEVELEVENT, 6000, 1)
+    pygame.time.set_timer(ENDLEVELEVENT, 62000, 1)
 
     CHANGERADEVENT = pygame.USEREVENT + 3
     pygame.time.set_timer(CHANGERADEVENT, 100)
@@ -109,6 +112,7 @@ def run_level1():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 save_result(score)
+                pygame.mixer.music.stop()
                 return
             if event.type == NEWARROWEVENT:
                 rad = 700

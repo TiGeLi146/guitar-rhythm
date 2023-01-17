@@ -80,6 +80,28 @@ def run_level2():
             self.rect = self.image.get_rect().move(
                 390, 235)
 
+    class AnimatedSprite(pygame.sprite.Sprite):
+        def __init__(self, sheet, columns, rows, x, y):
+            super().__init__(all_sprites)
+            self.frames = []
+            self.cut_sheet(sheet, columns, rows)
+            self.cur_frame = 0
+            self.image = self.frames[self.cur_frame]
+            self.rect = self.rect.move(x, y)
+
+        def cut_sheet(self, sheet, columns, rows):
+            self.rect = pygame.Rect(0, 0, sheet.get_width() // columns,
+                                    sheet.get_height() // rows)
+            for j in range(rows):
+                for k in range(columns):
+                    frame_location = (self.rect.w * k, self.rect.h * j)
+                    self.frames.append(sheet.subsurface(pygame.Rect(
+                        frame_location, self.rect.size)))
+
+        def update(self):
+            self.cur_frame = (self.cur_frame + 1) % len(self.frames)
+            self.image = self.frames[self.cur_frame]
+
     def draw_new_arrow():
         global current_arrow
         current_arrow = random.choice(arrow_names)
@@ -105,6 +127,7 @@ def run_level2():
     c_x = 290
     c_y = 10
     Circle(rad, c_x, c_y)
+    AnimatedSprite(load_image("animation.png", colorkey=-1), 5, 6, 220, 330)
 
     score = 0
 
@@ -116,9 +139,12 @@ def run_level2():
                 return
             if event.type == NEWARROWEVENT:
                 rad = 700
-                for i in all_sprites:
+                for i in arrows_group:
                     i.kill()
-                    all_sprites.clear(screen, bg)
+                    arrows_group.clear(screen, bg)
+                for i in circle_group:
+                    i.kill()
+                    circle_group.clear(screen, bg)
                 draw_new_arrow()
                 c_x = 290
                 c_y = 10

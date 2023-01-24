@@ -8,6 +8,7 @@ from level1 import run_level1
 from level1_results import show_level1_results_window
 from level2 import run_level2
 from level2_results import show_level2_results_window
+from final_window import show_final_window
 
 FPS = 50
 
@@ -46,3 +47,4 @@ if __name__ == '__main__':
     run_level2()
     f = open("data/res.txt", mode="r")
     show_level2_results_window(f.read())
+    show_final_window()

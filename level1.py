@@ -64,6 +64,7 @@ def run_level1():
     CHANGERADEVENT = pygame.USEREVENT + 3
     pygame.time.set_timer(CHANGERADEVENT, 100)
 
+    # Класс круга, который уменьшается во время игры
     class Circle(pygame.sprite.Sprite):
         def __init__(self, rad, x, y):
             super().__init__(circle_group, all_sprites)
@@ -72,6 +73,7 @@ def run_level1():
             self.rect = self.image.get_rect().move(
                 x, y)
 
+    # Класс стрелки
     class Arrow(pygame.sprite.Sprite):
         def __init__(self, tile_type):
             super().__init__(arrows_group, all_sprites)
@@ -80,6 +82,7 @@ def run_level1():
             self.rect = self.image.get_rect().move(
                 390, 235)
 
+    # Класс для создания анимации
     class AnimatedSprite(pygame.sprite.Sprite):
         def __init__(self, sheet, columns, rows, x, y):
             super().__init__(all_sprites)
@@ -138,6 +141,7 @@ def run_level1():
                 pygame.mixer.music.stop()
                 return
             if event.type == NEWARROWEVENT:
+                # Появляется новая стрелка в рандомном положении
                 rad = 700
                 for i in arrows_group:
                     i.kill()
@@ -150,6 +154,7 @@ def run_level1():
                 c_y = 10
                 Circle(rad, c_x, c_y)
             if event.type == CHANGERADEVENT:
+                # Уменьшается круг
                 rad -= 15
                 c_x += 7.5
                 c_y += 7.5
@@ -158,6 +163,7 @@ def run_level1():
                     all_sprites.clear(screen, bg)
                 Circle(rad, c_x, c_y)
             if event.type == ENDLEVELEVENT:
+                # Конец уровня
                 save_result(score)
                 return
             if event.type == pygame.KEYDOWN:

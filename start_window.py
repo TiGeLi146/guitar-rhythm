@@ -32,6 +32,7 @@ def terminate():
     sys.exit()
 
 
+# Функция, отрисовывающая окно
 def show_start_window():
     bg = pygame.transform.scale(load_image('bg.jpg'), (WIDTH, HEIGHT))
     screen.blit(bg, (0, 0))

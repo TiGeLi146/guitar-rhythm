@@ -41,10 +41,15 @@ def terminate():
 
 if __name__ == '__main__':
     f = open("data/res.txt", mode="r")
+    # Запускается стартовое окно
     show_start_window()
+    # Первый уровень
     run_level1()
+    # Результаты первого уровня, которые берутся из файла
     show_level1_results_window(f.read())
+    # Второй уровень
     run_level2()
     f = open("data/res.txt", mode="r")
+    # Результаты второго уровня, которые берутся из файла
     show_level2_results_window(f.read())
     show_final_window()

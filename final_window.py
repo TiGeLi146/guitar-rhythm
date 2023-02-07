@@ -35,6 +35,7 @@ def terminate():
 font_name = pygame.font.match_font('arial')
 
 
+# Функция отрисовки текста
 def draw_text(surf, text, size, x, y):
     font = pygame.font.Font(font_name, size)
     text_surface = font.render(text, True, pygame.Color('white'))
@@ -43,6 +44,7 @@ def draw_text(surf, text, size, x, y):
     surf.blit(text_surface, text_rect)
 
 
+# Функция, отрисовывающая окно
 def show_final_window():
     bg = pygame.transform.scale(load_image('final.jpg'), (WIDTH, HEIGHT))
     screen.blit(bg, (0, 0))
